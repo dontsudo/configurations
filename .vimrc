@@ -1,3 +1,15 @@
+set encoding=utf-8
+colorscheme jellybeans
+
+let g:jellybeans_overrides = {
+      \    'background': { 'ctermbg': 'none', '256ctermbg': 'none' },
+      \}
+if has('termguicolors') && &termguicolors
+  let g:jellybeans_overrides['background']['guibg'] = 'none'
+endif
+
+set completeopt-=preview
+
 syntax on
 set tabstop=2
 set shiftwidth=2
@@ -6,7 +18,6 @@ set ai
 set number
 set hlsearch
 set ruler
-set paste
 
 " Specify a directory for plugins
 " - For Neovim: stdpath('data') . '/plugged'
@@ -29,9 +40,6 @@ Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
 " Using a non-default branch
 Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
 
-" Using a tagged release; wildcard allowed (requires git 1.9.2 or above)
-Plug 'fatih/vim-go', { 'tag': '*' }
-
 " Plugin options
 Plug 'nsf/gocode', { 'tag': 'v.20150303', 'rtp': 'vim' }
 
@@ -41,5 +49,13 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 " Unmanaged plugin (manually installed and updated)
 Plug '~/my-prototype-plugin'
 
+Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
+
+" Black for python formatting
+Plug 'psf/black', { 'branch': 'stable' }
+
 " Initialize plugin system
 call plug#end()
+
+
+autocmd BufWritePost *.py silent! execute ':Black'
