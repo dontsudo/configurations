@@ -1,2 +1,6 @@
 # configurations
-Too many dot files..
+```bash
+# For black plug
+$ sudo apt install python3.8-venv
+
+```
