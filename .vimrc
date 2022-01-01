@@ -1,5 +1,15 @@
-set encoding=utf-8
 colorscheme jellybeans
+
+syntax on 
+set completeopt-=preview
+set expandtab
+set tabstop=4
+set softtabstop=4
+set shiftwidth=4
+set ai
+set number
+set hlsearch
+set ruler
 
 let g:jellybeans_overrides = {
       \    'background': { 'ctermbg': 'none', '256ctermbg': 'none' },
@@ -7,17 +17,6 @@ let g:jellybeans_overrides = {
 if has('termguicolors') && &termguicolors
   let g:jellybeans_overrides['background']['guibg'] = 'none'
 endif
-
-set completeopt-=preview
-
-syntax on
-set tabstop=2
-set shiftwidth=2
-set expandtab
-set ai
-set number
-set hlsearch
-set ruler
 
 " Specify a directory for plugins
 " - For Neovim: stdpath('data') . '/plugged'
@@ -37,19 +36,12 @@ Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
 
-" Using a non-default branch
-Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
-
 " Plugin options
 Plug 'nsf/gocode', { 'tag': 'v.20150303', 'rtp': 'vim' }
 
 " Plugin outside ~/.vim/plugged with post-update hook
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 
-" Unmanaged plugin (manually installed and updated)
-Plug '~/my-prototype-plugin'
-
-Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
 
 " Black for python formatting
 Plug 'psf/black', { 'branch': 'stable' }
@@ -59,3 +51,10 @@ call plug#end()
 
 
 autocmd BufWritePost *.py silent! execute ':Black'
+
+" This line need +clipboard 
+nnoremap <F2> :%y+<CR>
+
+" Run python
+nnoremap <F5> :w<CR>:!clear;python  %<CR>
+imap <F5> <Esc>:w<CR>:!clear;python  %<CR>
